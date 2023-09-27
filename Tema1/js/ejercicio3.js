@@ -4,7 +4,10 @@ function enunciadoEnColor(enunciado,color){
 
 document
     .getElementById('v1')
-    .addEventListener('click',enunciadoEnColor.bind(null,'enunciado1','green')
+    .addEventListener(
+        'click',
+        enunciadoEnColor.bind(null,'enunciado1','green')
+    );
         /* 
             El método bind de una función devuelve otra función
             similar a la original pero con los parámetros que se le 
@@ -17,7 +20,6 @@ document
                     miFuncion(param1, param2 ...)
                 }
         */
-    );
 
 document
     .getElementById('f1')
