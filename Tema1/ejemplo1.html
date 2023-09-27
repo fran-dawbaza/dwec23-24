@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Incrustar javascript</title>
 </head>
 <body>
-    
+    <noscript>
+        <h2>La página necesita javascript para su funcionamiento, por favor actívelo</h2>
+    </noscript>
+    <h1 id="titulo">Javascript incrustado desde un archivo externo</h1>
+    <script>
+        document.getElementById('titulo').innerHTML='Esto se ha cambiado desde javascript';
+    </script>
 </body>
 </html>
