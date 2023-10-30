@@ -41,3 +41,38 @@ function pintaTrianguloDerecha(tamano, caracter = ASTERISCO){
 
 pintaCuadrado(4);
 pintaCuadrado(6,'#');
+
+function pintaTablero(tamano){
+    function dameCaracteres(numero,caracter){
+        let resultado = '';
+        for (let i=0; i<numero;i++)
+            resultado += caracter;
+        return resultado;
+    }
+    function dameFila(numero,caracter1,caracter2){
+        let resultado = '';
+        for (let i=0;i<numero;i++){
+            let caracter = i%2 ? caracter1 : caracter2;
+            resultado += dameCaracteres(numero,caracter);
+        }
+        return resultado;
+    }
+    function dameBloque(numero,fila){
+        let resultado = '';
+        for (let i=0;i<numero;i++)
+            resultado += fila + '\n';
+        return resultado;
+    }
+    const fila1 = dameFila(tamano,'#','-');
+    const fila2 = dameFila(tamano,'-','#');
+    const bloque1 = dameBloque(tamano,fila1);
+    const bloque2 = dameBloque(tamano,fila2);
+
+    let resultado = '';
+    for (let i=0; i< tamano; i++){
+        const bloque = i%2 ? bloque1:bloque2;
+        resultado += bloque;
+    }
+    console.log(resultado);
+
+}
