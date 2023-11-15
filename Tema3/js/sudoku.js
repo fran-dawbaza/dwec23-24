@@ -6,10 +6,20 @@ class Sudoku {
             3, 3, 3, 3, 3, 3, 3, 3, 3,
             4, 4, 4, 4, 4, 4, 4, 4, 4,
             5, 5, 5, 5, 5, 5, 5, 5, 5,
-            6, 6, 6, 6, 6, 6, 6, 6, 6,
-            7, 7, 7, 7, 7, 7, 7, 7, 7,
-            8, 8, 8, 8, 8, 8, 8, 8, 8,
-            9, 9, 9, 9, 9, 9, 9, 9, 9
+            1, 2, 3, 4, 5, 6, 7, 8, 9,
+            1, 2, 3, 4, 5, 6, 7, 8, 9,
+            1, 2, 3, 4, 5, 6, 7, 8, 9,
+            1, 2, 3, 4, 5, 6, 7, 8, 9
+/*
+            9,	2,	3,	8,	6,	1,	7,	4,	5,
+            5,	4,	1,	2,	7,	9,	3,	8,	6,
+            7,	6,	8,	4,	3,	5,	2,	9,	1,
+            2,	8,	6,	7,	5,	3,	4,	1,	9,
+            3,	7,	9,	6,	1,	4,	8,	5,	2,
+            4,	1,	5,	9,	2,	8,	6,	3,	7,
+            1,	9,	2,	3,	4,	7,	5,	6,	8,
+            8,	3,	7,	5,	9,	6,	1,	2,	4,
+            6,	5,	4,	1,	8,	2,	9,	7,	3*/
         ];
         this.nuevo(mezclas);
     }
@@ -82,38 +92,42 @@ class Sudoku {
                 this.cambiaColumnas(6, 7);
                 break;
             default:
-                this.cambiaColumnas(Math.floor(Math.random() * 9));
+                this.intercambiaColumna(Math.floor(Math.random() * 9));
                 break;
         }
     }
 
     cambiaColumnas(a, b) {
-        // debes implementar este código
+        // debes implementar este código      
     }
 
-    nuevo(mezclas = 30) {
+    nuevo(mezclas = 10) {
         for (let i = 0; i < mezclas; i++) {
             this.intercambiaFila();
             this.intercambiaColumna();
         }
     }
 
-    muestra() {
+    muestra(porcentaje=1) {
         for (let i = 0; i < 81; i++) {
-            document.getElementById('td' + i).innerText = this.datos[i];
+            document.getElementById('td' + i).innerText = this.datos[i]; //Math.random()<porcentaje ? this.datos[i]:'';
         }
+    }
+
+    estaResuelto() {
+        // debe devolver true o false
     }
 }
 
 
 const miSudoku = new Sudoku();
 
-miSudoku.muestra();
+miSudoku.muestra(0.75);
 
 function nuevoSudoku(evento) {
     evento.preventDefault();
     miSudoku.nuevo();
-    miSudoku.muestra();
+    miSudoku.muestra(0.75);
 }
 
 
