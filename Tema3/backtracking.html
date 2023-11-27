@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku usando backtracking</title>
+</head>
+<body>
+    <h1>La técnica de backtracking o retroceso</h1>
+    <p>Consiste en buscar una solución a un problema usando "fuerza bruta". El algoritmo es muy sencillo, intento una solución y si no es válida pruebo otra. La gracia es hacerlo ordenadamente para poder probar soluciones descartando "caminos" por los que no podemos seguir.</p>
+    <p>Esta estrategia es útil en multitud de problemas, por ejemplo para buscar caminos en un laberinto o encontrar la posición de 8 reinas en un tablero de ajedrez</p>
+    <p>Para nuestro problema en cuestión podríamos pensar en la siguiente estrategia:</p>
+    <ol><li>Añadimos un número aleatorio a nuestro sudoku</li>
+        <li>Si por el momento no es posible llegar a una solución, deshacemos este cambio y lo tenemos en cuenta</li>
+        <li>Si no hemos llegado al final, volvemos al paso 1</li>
+    </ol>
+    
+    <h2>En la consola dejo un sudoku resuelto usando esta técnica</h2>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <ul>
+        <li data-nombre="pepe">Dato 1</li>
+        <li data-nombre="alberto">Dato 2</li>
+        
+    </ul>
+    
+    <script>
+        const elementos = document.querySelectorAll("[data-nombre='pepe']");
+        console.log(elementos[0].dataset.nombre);
+        console.log(elementos[1].dataset.nombre); // error, no existe
+    </script>
+</body>
+</html>
