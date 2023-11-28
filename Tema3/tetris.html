@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetris en Canvas</title>
+  <style>
+    canvas {
+      border: 1px solid #000;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+  <script>
+    // Obtener el canvas y el contexto
+const canvas = document.getElementById("tetrisCanvas");
+const ctx = canvas.getContext("2d");
+
+// Tamaño de cada bloque de la pieza
+const blockSize = 30;
+
+
+const piezaI = {
+    actual: 0,
+    color: "cyan",
+    rotaciones: [
+            [[1,1,1,1]],
+            [[1],[1],[1],[1]]
+        ]
+};
+const piezaL = {
+    actual: 0,
+    color: "orange",
+    rotaciones: [
+            [[1, 1, 1], [1]],
+            [[1,1],[0,1],[0,1]],
+            [[0,0,1],[1,1,1]],
+            [[1],[1],[1,1]]
+        ]
+};
+const piezaJ = {
+    actual: 0,
+    color: "green",
+    rotaciones: [
+            [[1, 1, 1], [0, 0, 1]],
+            [[0,1],[0,1],[1,1]],
+            [[1],[1,1,1]],
+            [[1,1],[1],[1]]
+        ]
+};
+const piezaO = {
+    actual: 0,
+    color: "brown",
+    rotaciones: [
+            [[1, 1], [1, 1]]
+        ]
+};
+const piezaT = {
+    actual: 0,
+    color: "purple",
+    rotaciones: [
+            [[1, 1, 1], [0, 1, 0]],
+            [[0,1],[1,1],[0,1]],
+            [[0,1],[1,1,1]],
+            [[1],[1,1],[1]]
+        ]
+};
+const piezaS = {
+    actual: 0,
+    color: "yellow",
+    rotaciones: [
+            [[1, 1], [0, 1, 1]],
+            [[0,1],[1,1],[1]]
+        ]
+};
+const piezaZ = {
+    actual: 0,
+    color: "red",
+    rotaciones: [
+            [[0, 1, 1],[1,1]],
+            [[1],[1,1],[0,1]]
+        ]
+};
+
+const pieza = (p)=>p.rotaciones[p.actual];
+const rotaPieza = (p)=>p.actual=(p.actual+1)%p.rotaciones.length;
+// Definir algunas piezas
+const arrPiezas = [piezaI,piezaL,piezaJ,piezaO,piezaT,piezaS,piezaZ];
+
+let piezaActual = arrPiezas[Math.floor(Math.random()*arrPiezas.length)];
+
+// Función para dibujar una pieza en el canvas
+function drawPiece(piece, color, offsetX, offsetY) {
+  piece.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value) {
+        ctx.fillStyle = color;
+        ctx.fillRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
+        ctx.strokeStyle = "#000";
+        ctx.strokeRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
+      }
+    });
+  });
+}
+
+function deletePiece(piece, offsetX, offsetY) {
+  piece.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value) {
+        ctx.fillStyle = "#FFF";
+        ctx.fillRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
+        ctx.strokeStyle = "#FFF";
+        ctx.strokeRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
+      }
+    });
+  });
+}
+
+// Dibujar algunas piezas de ejemplo
+
+//drawPiece(pieces[1], "orange", 5, 1);
+//drawPiece(pieces[4], "purple", 5, 4);
+//drawPiece(pieces[0], "cyan", 1, 1);
+//deletePiece(pieces[0], 1, 1);
+
+let ejeY=0;
+setInterval(()=>{
+    if (ejeY<20) {
+        deletePiece(pieza(piezaActual), 1, ejeY);
+        rotaPieza(piezaActual);
+        drawPiece(pieza(piezaActual), piezaActual.color, 1, ++ejeY);
+    }
+    else {
+        ejeY=0;
+        piezaActual = arrPiezas[Math.floor(Math.random()*arrPiezas.length)];
+    }
+},1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujo de Funciones</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="400" style="border:1px solid #000;"></canvas>
+
+    <script>
+        // Función para dibujar la gráfica de una función en el canvas
+        function drawFunction(canvasId, func, xMin, xMax, yMin, yMax) {
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext("2d");
+            
+            // Limpia el canvas
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Parámetros de escala
+            const scaleX = canvas.width / (xMax - xMin);
+            const scaleY = canvas.height / (yMax - yMin);
+
+            // Dibuja ejes
+            context.beginPath();
+            context.moveTo(0, canvas.height / 2);  // Eje Y
+            context.lineTo(canvas.width, canvas.height / 2);
+            context.moveTo(canvas.width / 2, 0);  // Eje X
+            context.lineTo(canvas.width / 2, canvas.height);
+            context.strokeStyle = "#000";
+            context.stroke();
+
+            // Dibuja la función
+            context.beginPath();
+            context.moveTo(0, canvas.height / 2 - func(xMin) * scaleY);
+            for (let x = xMin; x <= xMax; x += 0.1) {
+                const y = func(x);
+                context.lineTo((x - xMin) * scaleX, canvas.height / 2 - y * scaleY);
+            }
+            context.strokeStyle = "#f00";  // Color de la línea de la función
+            context.stroke();
+        }
+
+        // Ejemplo de una función cuadrática: f(x) = x^2
+        function quadraticFunction(x) {
+            return x * x;
+        }
+        function cubicFunction(x) {
+            return x * Math.pow(x,Math.E);
+        }
+
+        // Dibuja la función cuadrática en el canvas
+        drawFunction("myCanvas", quadraticFunction, -5, 5, -5, 25);
+        drawFunction("myCanvas", cubicFunction, -5, 5, -5, 25);
+    </script>
+</body>
+</html>
