@@ -26,6 +26,8 @@ const blockSize = 30;
 const piezaI = {
     actual: 0,
     color: "cyan",
+    ejeX: 0,
+    ejeY: 0,
     rotaciones: [
             [[1,1,1,1]],
             [[1],[1],[1],[1]]
@@ -34,6 +36,8 @@ const piezaI = {
 const piezaL = {
     actual: 0,
     color: "orange",
+    ejeX: 0,
+    ejeY: 0,
     rotaciones: [
             [[1, 1, 1], [1]],
             [[1,1],[0,1],[0,1]],
@@ -44,6 +48,8 @@ const piezaL = {
 const piezaJ = {
     actual: 0,
     color: "green",
+    ejeX: 0,
+    ejeY: 0,
     rotaciones: [
             [[1, 1, 1], [0, 0, 1]],
             [[0,1],[0,1],[1,1]],
@@ -54,6 +60,8 @@ const piezaJ = {
 const piezaO = {
     actual: 0,
     color: "brown",
+    ejeX: 0,
+    ejeY: 0,
     rotaciones: [
             [[1, 1], [1, 1]]
         ]
@@ -61,6 +69,8 @@ const piezaO = {
 const piezaT = {
     actual: 0,
     color: "purple",
+    ejeX: 0,
+    ejeY: 0,
     rotaciones: [
             [[1, 1, 1], [0, 1, 0]],
             [[0,1],[1,1],[0,1]],
@@ -71,6 +81,8 @@ const piezaT = {
 const piezaS = {
     actual: 0,
     color: "yellow",
+    ejeX: 0,
+    ejeY: 0,
     rotaciones: [
             [[1, 1], [0, 1, 1]],
             [[0,1],[1,1],[1]]
@@ -79,6 +91,8 @@ const piezaS = {
 const piezaZ = {
     actual: 0,
     color: "red",
+    ejeX: 0,
+    ejeY: 0,
     rotaciones: [
             [[0, 1, 1],[1,1]],
             [[1],[1,1],[0,1]]
@@ -87,13 +101,40 @@ const piezaZ = {
 
 const pieza = (p)=>p.rotaciones[p.actual];
 const rotaPieza = (p)=>p.actual=(p.actual+1)%p.rotaciones.length;
+const derechaPieza = (p)=>{
+  deletePiece(p);
+  p.ejeX=p.ejeX<20?p.ejeX+1:20
+  console.log(p.ejeX)
+  drawPiece(p);
+};
+const izquierdaPieza = (p)=>{
+  deletePiece(p);
+  p.ejeX=p.ejeX>0?p.ejeX-1:0
+  console.log(p.ejeX)
+  drawPiece(p);
+};
+
 // Definir algunas piezas
 const arrPiezas = [piezaI,piezaL,piezaJ,piezaO,piezaT,piezaS,piezaZ];
 
 let piezaActual = arrPiezas[Math.floor(Math.random()*arrPiezas.length)];
 
+document.addEventListener("keydown", function(event) {
+  console.log("tecla: " + event.key);
+  if (event.key === "ArrowRight") {
+    derechaPieza(piezaActual);
+  }
+  else if (event.key === "ArrowLeft") {
+    izquierdaPieza(piezaActual);
+  }
+});
+
 // Función para dibujar una pieza en el canvas
-function drawPiece(piece, color, offsetX, offsetY) {
+function drawPiece(p) {
+  const color = p.color;
+  const offsetX = p.ejeX;
+  const offsetY = p.ejeY;
+  const piece = pieza(p);
   piece.forEach((row, y) => {
     row.forEach((value, x) => {
       if (value) {
@@ -106,14 +147,17 @@ function drawPiece(piece, color, offsetX, offsetY) {
   });
 }
 
-function deletePiece(piece, offsetX, offsetY) {
+function deletePiece(p) {
+  const offsetX = p.ejeX;
+  const offsetY = p.ejeY;
+  const piece = pieza(p);
   piece.forEach((row, y) => {
     row.forEach((value, x) => {
       if (value) {
         ctx.fillStyle = "#FFF";
-        ctx.fillRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
-        ctx.strokeStyle = "#FFF";
-        ctx.strokeRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
+        ctx.fillRect((x + offsetX) * blockSize -1, (y + offsetY) * blockSize - 1, blockSize+2, blockSize+2);
+        //ctx.strokeStyle = "#FFF";
+        //ctx.strokeRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
       }
     });
   });
@@ -126,16 +170,17 @@ function deletePiece(piece, offsetX, offsetY) {
 //drawPiece(pieces[0], "cyan", 1, 1);
 //deletePiece(pieces[0], 1, 1);
 
-let ejeY=0;
+
 setInterval(()=>{
-    if (ejeY<20) {
-        deletePiece(pieza(piezaActual), 1, ejeY);
+    if (piezaActual.ejeY<20) {
+        deletePiece(piezaActual);
         rotaPieza(piezaActual);
-        drawPiece(pieza(piezaActual), piezaActual.color, 1, ++ejeY);
+        piezaActual.ejeY++;
+        drawPiece(piezaActual);
     }
-    else {
-        ejeY=0;
+    else {        
         piezaActual = arrPiezas[Math.floor(Math.random()*arrPiezas.length)];
+        piezaActual.ejeY=0;
     }
 },1000);
   </script>
