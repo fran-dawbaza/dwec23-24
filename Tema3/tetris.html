@@ -22,12 +22,20 @@ const ctx = canvas.getContext("2d");
 // Tamaño de cada bloque de la pieza
 const blockSize = 30;
 
+//
+const matrizJuego = new Array(20).fill(new Array(10).fill(0));
+
+
+console.dir(matrizJuego);
+
 
 const piezaI = {
     actual: 0,
     color: "cyan",
     ejeX: 0,
     ejeY: 0,
+    ancho:[4,1],
+    alto: [1,4],
     rotaciones: [
             [[1,1,1,1]],
             [[1],[1],[1],[1]]
@@ -38,6 +46,8 @@ const piezaL = {
     color: "orange",
     ejeX: 0,
     ejeY: 0,
+    ancho: [3,2,3,2],
+    alto:[2,3,2,3],
     rotaciones: [
             [[1, 1, 1], [1]],
             [[1,1],[0,1],[0,1]],
@@ -50,6 +60,8 @@ const piezaJ = {
     color: "green",
     ejeX: 0,
     ejeY: 0,
+    ancho: [3,2,3,2],
+    alto: [2,3,2,3],
     rotaciones: [
             [[1, 1, 1], [0, 0, 1]],
             [[0,1],[0,1],[1,1]],
@@ -62,6 +74,8 @@ const piezaO = {
     color: "brown",
     ejeX: 0,
     ejeY: 0,
+    ancho: [2],
+    alto: [2],
     rotaciones: [
             [[1, 1], [1, 1]]
         ]
@@ -71,6 +85,8 @@ const piezaT = {
     color: "purple",
     ejeX: 0,
     ejeY: 0,
+    ancho: [3,2,3,2],
+    alto: [2,3,2,3],
     rotaciones: [
             [[1, 1, 1], [0, 1, 0]],
             [[0,1],[1,1],[0,1]],
@@ -83,6 +99,8 @@ const piezaS = {
     color: "yellow",
     ejeX: 0,
     ejeY: 0,
+    ancho: [3,2],
+    alto: [2,3],
     rotaciones: [
             [[1, 1], [0, 1, 1]],
             [[0,1],[1,1],[1]]
@@ -93,6 +111,8 @@ const piezaZ = {
     color: "red",
     ejeX: 0,
     ejeY: 0,
+    ancho: [3,2],
+    alto: [2,3],
     rotaciones: [
             [[0, 1, 1],[1,1]],
             [[1],[1,1],[0,1]]
@@ -100,11 +120,15 @@ const piezaZ = {
 };
 
 const pieza = (p)=>p.rotaciones[p.actual];
-const rotaPieza = (p)=>p.actual=(p.actual+1)%p.rotaciones.length;
+const rotaPieza = (p)=>{
+  deletePiece(p);
+  p.actual=(p.actual+1)%p.rotaciones.length;
+  p.ejeX=p.ejeX<10-p.ancho[p.actual]?p.ejeX:10-p.ancho[p.actual]
+  drawPiece(p);
+}
 const derechaPieza = (p)=>{
   deletePiece(p);
-  p.ejeX=p.ejeX<20?p.ejeX+1:20
-  console.log(p.ejeX)
+  p.ejeX=p.ejeX<10-p.ancho[p.actual]?p.ejeX+1:10-p.ancho[p.actual];
   drawPiece(p);
 };
 const izquierdaPieza = (p)=>{
@@ -112,6 +136,11 @@ const izquierdaPieza = (p)=>{
   p.ejeX=p.ejeX>0?p.ejeX-1:0
   console.log(p.ejeX)
   drawPiece(p);
+};
+const abajoPieza = (p)=>{
+  deletePiece(piezaActual);
+  piezaActual.ejeY++;
+  drawPiece(piezaActual);
 };
 
 // Definir algunas piezas
@@ -127,6 +156,13 @@ document.addEventListener("keydown", function(event) {
   else if (event.key === "ArrowLeft") {
     izquierdaPieza(piezaActual);
   }
+  else if (event.key === "ArrowUp") {
+    rotaPieza(piezaActual);
+  }
+  else if (event.key === "ArrowDown") {
+    abajoPieza(piezaActual);
+  }
+
 });
 
 // Función para dibujar una pieza en el canvas
@@ -147,6 +183,24 @@ function drawPiece(p) {
   });
 }
 
+function drawPiece(p) {
+  const color = p.color;
+  const offsetX = p.ejeX;
+  const offsetY = p.ejeY;
+  const piece = pieza(p);
+  piece.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value) {
+        ctx.fillStyle = color;
+        ctx.fillRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
+        ctx.strokeStyle = "#000";
+        ctx.strokeRect((x + offsetX) * blockSize, (y + offsetY) * blockSize, blockSize, blockSize);
+      }
+    });
+  });
+}
+
+
 function deletePiece(p) {
   const offsetX = p.ejeX;
   const offsetY = p.ejeY;
@@ -163,26 +217,40 @@ function deletePiece(p) {
   });
 }
 
-// Dibujar algunas piezas de ejemplo
+function drawTablero(t) {
+  t.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value) {
+        ctx.fillStyle = "grey";
+        ctx.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);
+        ctx.strokeStyle = "grey";
+        ctx.strokeRect(x * blockSize, y * blockSize, blockSize, blockSize);
+      }
+    });
+  });
+}
 
-//drawPiece(pieces[1], "orange", 5, 1);
-//drawPiece(pieces[4], "purple", 5, 4);
-//drawPiece(pieces[0], "cyan", 1, 1);
-//deletePiece(pieces[0], 1, 1);
 
+
+function colisionAbajo(p, m){
+  const pi = pieza(p);
+  console.log(pi);
+  if (p.ejeY + p.alto[p.actual]>=20)
+    return true;
+  //for (let i=0; i<p.ancho[p.actual];i++)
+  //  if (m[]p.ejeX+i)
+}
 
 setInterval(()=>{
-    if (piezaActual.ejeY<20) {
-        deletePiece(piezaActual);
-        rotaPieza(piezaActual);
-        piezaActual.ejeY++;
-        drawPiece(piezaActual);
-    }
-    else {        
+    abajoPieza(piezaActual);
+    drawTablero(matrizJuego);
+    if (colisionAbajo(piezaActual, matrizJuego)) {
+       // fijaAbajo(piezaActual, matrizJuego);        
         piezaActual = arrPiezas[Math.floor(Math.random()*arrPiezas.length)];
         piezaActual.ejeY=0;
     }
 },1000);
+drawTablero(matrizJuego);
   </script>
 </body>
 </html>
