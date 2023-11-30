@@ -138,6 +138,7 @@ const izquierdaPieza = (p)=>{
   drawPiece(p);
 };
 const abajoPieza = (p)=>{
+  if (colisionAbajo(p,matrizJuego)) return;
   deletePiece(piezaActual);
   piezaActual.ejeY++;
   drawPiece(piezaActual);
