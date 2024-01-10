@@ -110,11 +110,13 @@ const productos = [
 ];
 //e) Obtén un array de productos sin precio, es decir, con solo las propiedades nombre y categoria.
 
-//f) crear un objeto con el nombre de cada categoría y la cantidad de productos que pertenecen a esa categoría. Por ejemplo, para este caso el objeto debe tener la siguiente forma:
-
+/*
+f) crear un objeto con el nombre de cada categoría y la cantidad de productos que pertenecen a esa categoría. 
+Por ejemplo, para este caso el objeto debe tener la siguiente forma:
 {
   'Category 1': 2,
   'Category 2': 2,
   'Category 3': 1
 }
-//Pista: usa map para obtener los nombres de la categoria y luego reduce para contar cada categoria.
+Pista: usa map para obtener los nombres de la categoria y luego reduce para contar cada categoria.
+*/
