@@ -64,3 +64,57 @@ const mediaVentaCoches = coches.reduce((ac,coche, posicion, coches)=>{
 }, 0);
 
 console.log (mediaVentaCoches);
+
+/*
+Usando programación funcional (filter, map, reduce) y 
+así como otras funciones de arrays resuelve las siguientes 
+cuestiones y prueba su funcionamiento. 
+Como se trata de programación funcional, 
+no debes usar ningún tipo de bucle:
+
+- Dado un array como el siguiente:
+*/
+const pedidos = [
+  { id: 1, cliente: 'Pablito', items: ['Producto 1', 'Producto 2'] },
+  { id: 2, cliente: 'Miguelón', items: ['Producto 3', 'Producto 4'] },
+  { id: 3, cliente: 'Ricardín', items: ['Producto 5'] },
+  { id: 4, cliente: 'Pablito', items: ['Producto 2', 'Producto 4'] },
+  { id: 5, cliente: 'Ruperta', items: ['Producto 3'] }
+];
+// a) Obtener un array con los pedidos que contienen 
+// el ítem 'Producto 3' y ordena los pedidos por el nombre de cliente.
+
+// b) Obtener un array con los ítems de los pedidos del cliente 'Pablito'. (Pista puedes usar filter, luego map y luego flat para aplanar el resultado)
+
+//- Dado un array como el siguiente:
+
+const ventas = [
+  { fecha: '2021-12-29', cantidad: 100 },
+  { fecha: '2022-01-02', cantidad: 200 },
+  { fecha: '2022-01-03', cantidad: 350 },
+  { fecha: '2022-01-04', cantidad: 240 },
+  { fecha: '2022-02-05', cantidad: 500 }
+];
+//c) Obtén un array con las ventas de enero y febrero, ordenado por cantidad.
+
+//d) Calcula el promedio de ventas del mes de enero. (Pista haz un filter y luego reduce)
+
+//- Dado un array como el siguiente:
+
+const productos = [
+  { nombre: 'Producto 1', precio: 10, categoria: 'Categoria 1' },
+  { nombre: 'Producto 2', precio: 20, categoria: 'Categoria 1' },
+  { nombre: 'Producto 3', precio: 30, categoria: 'Categoria 2' },
+  { nombre: 'Producto 4', precio: 40, categoria: 'Categoria 2' },
+  { nombre: 'Producto 5', precio: 50, categoria: 'Categoria 3' }
+];
+//e) Obtén un array de productos sin precio, es decir, con solo las propiedades nombre y categoria.
+
+//f) crear un objeto con el nombre de cada categoría y la cantidad de productos que pertenecen a esa categoría. Por ejemplo, para este caso el objeto debe tener la siguiente forma:
+
+{
+  'Category 1': 2,
+  'Category 2': 2,
+  'Category 3': 1
+}
+//Pista: usa map para obtener los nombres de la categoria y luego reduce para contar cada categoria.
