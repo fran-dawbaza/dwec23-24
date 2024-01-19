@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+  <ul>
+    <li>Animales
+      <ul>
+        <li>Mamíferos
+          <ul>
+            <li>Vacas</li>
+            <li>Burros</li>
+            <li>Perros</li>
+            <li>Tigres</li>
+          </ul>
+        </li>
+        <li>Otros
+          <ul>
+            <li>Serpientes</li>
+            <li>Aves</li>
+            <li>Lagartos</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Peces
+      <ul>
+        <li>Acuario
+          <ul>
+            <li>Guppy</li>
+            <li>Angelote</li>
+          </ul>
+        </li>
+        <li>Mar
+          <ul>
+            <li>Trucha de mar</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    // ... tu código...
+    const lis = document.querySelectorAll('LI');
+
+    for (let li of lis) {
+        console.log(li.firstChild.data.trim() +
+                ': ' 
+                +li.querySelectorAll('LI').length );
+    }
+  </script>
+
+</body>
+</html>

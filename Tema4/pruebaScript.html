@@ -1,0 +1,18 @@
+<!doctype html>
+<body>
+
+<h1>Hola</h1>
+
+<div>¡Hola, mundo!</div>
+
+<script>
+  let div = document.querySelector('div');
+
+  // reemplaza div.outerHTML con <p>...</p>
+  div.outerHTML = '<p>Un nuevo elemento</p>'; // (*)
+
+  // ¡Guauu! ¡'div' sigue siendo el mismo!
+  alert(div.outerHTML); // <div>¡Hola, mundo!</div> (**)
+</script>
+
+</body>

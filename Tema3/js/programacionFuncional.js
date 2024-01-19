@@ -84,7 +84,30 @@ const pedidos = [
 // a) Obtener un array con los pedidos que contienen 
 // el ítem 'Producto 3' y ordena los pedidos por el nombre de cliente.
 
-// b) Obtener un array con los ítems de los pedidos del cliente 'Pablito'. (Pista puedes usar filter, luego map y luego flat para aplanar el resultado)
+const tieneP3 = p=>p.items.includes('Producto 3');
+const comparaPorCliente = (a,b)=>(a.cliente>b.cliente)?1:-1;
+
+const pedidosConP3 = pedidos
+                        .filter(tieneP3)
+                        .sort(comparaPorCliente);
+
+console.log('Pedidos con Producto 3 ordenados: ', pedidosConP3);
+
+// b) Obtener un array con los ítems de los pedidos 
+// del cliente 'Pablito'. (Pista puedes usar filter, 
+// luego map y luego flat para aplanar el resultado)
+
+const esDePablito = p=>p.cliente==='Pablito';
+
+const sinRepetir = (item,indice,items)=>items.indexOf(item)===indice;
+
+const itemsDePablito = pedidos
+                            .filter(esDePablito)
+                            .map(p=>p.items)
+                            .flat()
+                            .filter(sinRepetir);
+
+console.log(itemsDePablito);
 
 //- Dado un array como el siguiente:
 
@@ -95,10 +118,34 @@ const ventas = [
   { fecha: '2022-01-04', cantidad: 240 },
   { fecha: '2022-02-05', cantidad: 500 }
 ];
-//c) Obtén un array con las ventas de enero y febrero, ordenado por cantidad.
+//c) Obtén un array con las ventas de enero y febrero, 
+// ordenado por cantidad.
+const esDeEneroOFebrero = v=>{
+    const mes = +v.fecha.split('-')[1];
+    return mes===1 || mes === 2;
+};
+const comparaCantidad = (a,b)=>a.cantidad-b.cantidad;
 
-//d) Calcula el promedio de ventas del mes de enero. (Pista haz un filter y luego reduce)
+const ventasEneroYFebrero = ventas
+                                .filter(esDeEneroOFebrero)
+                                .sort(comparaCantidad);
 
+console.log(ventasEneroYFebrero);
+
+//d) Calcula el promedio de ventas del mes de enero.
+// (Pista haz un filter y luego reduce)
+
+const esDeEnero = v=> (new Date(v.fecha)).getMonth()===0; // enero es 0
+
+const media = (ac, v,i,ventasDeEnero) => (i<ventasDeEnero.length-1) ?
+                                             ac+v.cantidad : 
+                                             (ac+v.cantidad)/ventasDeEnero.length
+
+const promedioVentasEnero = ventas
+                                .filter(esDeEnero)
+                                .reduce(media, 0);
+
+console.log(promedioVentasEnero);                                
 //- Dado un array como el siguiente:
 
 const productos = [
@@ -108,13 +155,44 @@ const productos = [
   { nombre: 'Producto 4', precio: 40, categoria: 'Categoria 2' },
   { nombre: 'Producto 5', precio: 50, categoria: 'Categoria 3' }
 ];
-//e) Obtén un array de productos sin precio, es decir, con solo las propiedades nombre y categoria.
+//e) Obtén un array de productos sin precio, 
+//es decir, con solo las propiedades nombre y categoria.
 
-//f) crear un objeto con el nombre de cada categoría y la cantidad de productos que pertenecen a esa categoría. Por ejemplo, para este caso el objeto debe tener la siguiente forma:
+const productosSinPrecio = productos.map(p=>({
+  nombre: p.nombre,
+  categoria: p.categoria
+}));
+console.log(productosSinPrecio);
+
+/*
+f) crear un objeto con el nombre de cada categoría y 
+la cantidad de productos que pertenecen a esa categoría. 
+Por ejemplo, para este caso el objeto debe tener la siguiente forma:
 
 {
   'Category 1': 2,
   'Category 2': 2,
   'Category 3': 1
 }
-//Pista: usa map para obtener los nombres de la categoria y luego reduce para contar cada categoria.
+//Pista: usa map para obtener los nombres de la categoria
+// y luego reduce para contar cada categoria.
+*/
+
+const numeroProductosPorCategoria = productos
+                  .map(p=>p.categoria)
+                  .reduce((ac,c)=>(
+                    {
+                      ...ac,
+                      [c]: (ac[c] ? ac[c] + 1: 1)
+                    })
+                  ,{});
+
+console.log(numeroProductosPorCategoria);
+
+// lo mismo con programación imperativa:
+const nPPC = {};
+for (let p of productos)
+    nPPC[p.categoria] = nPPC[p.categoria] ? nPPC[p.categoria]+1:1;
+
+
+console.log(nPPC);
