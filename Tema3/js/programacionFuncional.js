@@ -158,7 +158,6 @@ const productos = [
 //e) Obtén un array de productos sin precio, 
 //es decir, con solo las propiedades nombre y categoria.
 
-<<<<<<< HEAD
 const productosSinPrecio = productos.map(p=>({
   nombre: p.nombre,
   categoria: p.categoria
@@ -170,17 +169,11 @@ f) crear un objeto con el nombre de cada categoría y
 la cantidad de productos que pertenecen a esa categoría. 
 Por ejemplo, para este caso el objeto debe tener la siguiente forma:
 
-=======
-/*
-f) crear un objeto con el nombre de cada categoría y la cantidad de productos que pertenecen a esa categoría. 
-Por ejemplo, para este caso el objeto debe tener la siguiente forma:
->>>>>>> 6cb16a9b8171ffeb75dce040076730c280f3ae0c
 {
   'Category 1': 2,
   'Category 2': 2,
   'Category 3': 1
 }
-<<<<<<< HEAD
 //Pista: usa map para obtener los nombres de la categoria
 // y luego reduce para contar cada categoria.
 */
@@ -203,7 +196,3 @@ for (let p of productos)
 
 
 console.log(nPPC);
-=======
-Pista: usa map para obtener los nombres de la categoria y luego reduce para contar cada categoria.
-*/
->>>>>>> 6cb16a9b8171ffeb75dce040076730c280f3ae0c
