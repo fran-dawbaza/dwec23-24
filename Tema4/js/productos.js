@@ -13,7 +13,7 @@ function muestraProductos(p){
     <td>
     <i data-id-producto="${p.id}" class="bi bi-eye" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productoModal"></i></td>
   </tr>`).join('');
-    const tabla = `    <table class="table">
+    const tabla = `    <table id="mis-productos" class="table">
     <thead>
       <tr>
         <th scope="col">Nombre</th>
@@ -52,3 +52,19 @@ function muestraProducto(evento,productos){
         console.log('No has hecho click en un <i ...>');
     }
 }
+
+function filtraProductosCon(texto){
+  const tabla = document.getElementById('mis-productos');
+  const textoEnMinuscula = texto.toLowerCase();
+  if (!tabla) return;
+  //console.log('ahí va');
+  for (let fila of tabla.tBodies[0].rows){
+    if (fila.textContent.toLowerCase().includes(textoEnMinuscula))
+        fila.classList.remove('filtrado');
+    else
+        fila.classList.add('filtrado');
+  }
+}
+
+document.getElementById('filtra-producto')
+    .addEventListener('input',(e)=>filtraProductosCon(e.target.value));
