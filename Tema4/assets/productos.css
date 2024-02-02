@@ -1,4 +1,8 @@
-.filtrado {
+.filtradoTexto {
+    display: none;
+}
+
+.ocultoPaginacion {
     display: none;
 }
 

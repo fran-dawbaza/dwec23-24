@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <div id="tree"></div>
+
+  <!-- El resultado debe ser:
+<div id="tree">
+<ul>
+  <li>Fish
+    <ul>
+      <li>trout</li>
+      <li>salmon</li>
+    </ul>
+  </li>
+  <li>Trees
+    <ul>
+      <li>Huge
+        <ul>
+          <li>sequoia</li>
+          <li>oak</li>
+        </ul>
+      </li>
+      <li>Flowering
+        <ul>
+          <li>apple tree</li>
+          <li>magnolia</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+-->
+
+  <script>
+    let data = {
+      "Fish": {
+        "trout": {},
+        "salmon": {}
+      },
+
+      "Tree": {
+        "Huge": {
+          "sequoia": {},
+          "oak": {}
+        },
+        "Flowering": {
+          "apple tree": {},
+          "magnolia": {}
+        }
+      }
+    };
+
+    function createTree(container, data) {
+      /* tu código */
+
+      const keys = Object.keys(data);
+      if (!keys.length) return;
+      
+      const ul = document.createElement('ul');
+      container.append(ul);
+      
+      for (let key of keys){
+        const liKey = document.createElement('li');
+        liKey.append(key); // añado nodo de texto con el nombre de la propiedad
+        ul.append(liKey); // añado elemento li
+        createTree(ul,data[key]);
+      }
+    }
+
+    createTree(document.getElementById('tree'), data);
+  </script>
+
+</body>
+</html>
