@@ -64,6 +64,12 @@ function muestraProductos(p){
     miDiv.addEventListener('click', (e)=>{
         muestraProducto(e,p);
     });
+    miDiv.addEventListener('click',e=>{
+      if (e.target.tagName !== 'A') return;
+      if (!e.target.closest('#navPaginacion')) return;
+      if (!e.target.parentElement.dataset.pagina) return;
+      filtraProductosPorPagina(+e.target.parentElement.dataset.pagina);
+    });
     preparaOrdenacion('mis-productos');
 }
 
@@ -80,12 +86,12 @@ function obtenPaginacion(pagina, paginas){
   }
   const outerHTML =  `<nav id="navPaginacion" aria-label="Page navigation">
   <ul class="pagination justify-content-end">
-    <li class="page-item ${pagina===1?'disabled':''}">
-      <a class="page-link" onclick="console.dir(globalThis)">&lt;</a>
+    <li data-pagina="${pagina-1}" class="page-item ${pagina===1?'disabled':''}">
+      <a class="page-link">&lt;</a>
     </li>
     ${lis}
-    <li class="page-item ${pagina===paginas?'disabled':''}">
-      <a class="page-link" onclick="console.dir(globalThis)" href="#">&gt;</a>
+    <li data-pagina="${pagina+1}" class="page-item ${pagina===paginas?'disabled':''}">
+      <a class="page-link" href="#">&gt;</a>
     </li>
   </ul>
 </nav>`;
@@ -94,13 +100,6 @@ function obtenPaginacion(pagina, paginas){
   if (navPaginacion){
     navPaginacion.outerHTML = outerHTML;
     // en la línea anterior navPaginacion sale del DOM
-    navPaginacion = document.getElementById('navPaginacion');
-    navPaginacion.addEventListener('click', e=>{
-      if (e.target.tagName === 'LI'){
-        if (e.target.dataset.pagina)
-          filtraProductosPorPagina(e.target.dataset.pagina);
-      }
-    })
   }
   else {
     return outerHTML;
