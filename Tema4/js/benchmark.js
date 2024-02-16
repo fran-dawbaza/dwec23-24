@@ -1,12 +1,12 @@
 const contenedor = document.getElementById('contenedor');
 const iteraciones = 500;
 
-testModificationDOM(htmlTemplateConFragmento,30, "Usando HTML template y fragmento");
-testModificationDOM(htmlTemplateSinFragmento,30, "Usando HTML template sin fragmento");
-testModificationDOM(createElementConFragmento,30, "Usando createElement y fragmento");
-testModificationDOM(createElementSinFragmento,30, "Usando createElement sin fragmento");
-testModificationDOM(innerHtml,30, "Modificando innerHTML una sola vez");
-testModificationDOM(innerHtmlEnCadaPasada,30, "Modificando innerHTML en cada pasada");
+testModificacionDOM(htmlTemplateConFragmento,30, "Usando HTML template y fragmento");
+testModificacionDOM(htmlTemplateSinFragmento,30, "Usando HTML template sin fragmento");
+testModificacionDOM(createElementConFragmento,30, "Usando createElement y fragmento");
+testModificacionDOM(createElementSinFragmento,30, "Usando createElement sin fragmento");
+testModificacionDOM(innerHtml,30, "Modificando innerHTML una sola vez");
+testModificacionDOM(innerHtmlEnCadaPasada,30, "Modificando innerHTML en cada pasada");
 
 
 
@@ -147,7 +147,7 @@ function innerHtmlEnCadaPasada(){
     }
 }
 
-function testModificationDOM(callback, iteraciones, mensaje) {
+function testModificacionDOM(callback, iteraciones, mensaje) {
 
     console.log('----------------------');
     console.log(mensaje);
