@@ -79,10 +79,12 @@ function obtenPaginacion(pagina, paginas){
 
   let lis = '';
   for (let i=1; i<=paginas;i++){
-
-    lis += `<li data-pagina="${i}" class="page-item ${i===pagina?'active':''}">
-      <a class="page-link" href="#" >${i}</a>
-    </li>`;
+    if (i===1 || i===paginas || i===pagina ||
+      i=== Math.floor(pagina/2) || i=== Math.floor((pagina+paginas)/2)) {
+      lis += `<li data-pagina="${i}" class="page-item ${i===pagina?'active':''}">
+                  <a class="page-link" href="#" >${i}</a>
+              </li>`;
+    }
   }
   const outerHTML =  `<nav id="navPaginacion" aria-label="Page navigation">
   <ul class="pagination justify-content-end">

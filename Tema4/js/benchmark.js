@@ -120,14 +120,13 @@ function innerHtml(){
     contenedor.replaceChildren(); // en lugar de contenedor.innerHTML=''
     let contenido = '';
     for (let i=0;i<iteraciones;i++){
-       contenido += `
-       <div>
-           <h1>${'Cabecera '+ i}</h1>
-           <p>${'parrafo ' + i*2}</p>
-           <p>${'parrafo ' + (i*2+1)}</p>
-           <button>${'boton '+i}</button>
-       </div>
-       `;
+    contenido += `
+    <div>
+        <h1>${'Cabecera '+ i}</h1>
+        <p>${'parrafo ' + i*2}</p>
+        <p>${'parrafo ' + (i*2+1)}</p>
+        <button>${'boton '+i}</button>
+    </div>`;
     }
     contenedor.innerHTML=contenido;
 }
@@ -137,13 +136,12 @@ function innerHtmlEnCadaPasada(){
 
     for (let i=0;i<iteraciones;i++){
         contenedor.innerHTML += `
-       <div>
-           <h1>${'Cabecera '+ i}</h1>
-           <p>${'parrafo ' + i*2}</p>
-           <p>${'parrafo ' + (i*2+1)}</p>
-           <button>${'boton '+i}</button>
-       </div>
-       `;
+    <div>
+        <h1>${'Cabecera '+ i}</h1>
+        <p>${'parrafo ' + i*2}</p>
+        <p>${'parrafo ' + (i*2+1)}</p>
+        <button>${'boton '+i}</button>
+    </div>`;
     }
 }
 
