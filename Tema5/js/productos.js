@@ -5,7 +5,6 @@ const maxProductosPorPagina = 5;
 
 muestraProductos(productos);
 
-//console.log('globalThis: ', globalThis)
 
 const filtraProductosPorPagina = (pagina=1)=>{
   const tabla = document.getElementById('mis-productos');

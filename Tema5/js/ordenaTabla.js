@@ -1,3 +1,20 @@
+/*
+Se requiere que la tabla con id idTabla tenga el atributo 
+data-orden="cadena" o data-orden="numero" en las celdas de cabecera (TH)
+ejemplo:
+<table>
+    <thead>
+        <tr>
+            <th data-orden="cadena">Nombre</th>
+            <th>teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>...</tr>
+        ...
+    </tbody>
+</table>
+*/
 function preparaOrdenacion(idTabla){
     const tabla = document.getElementById(idTabla);
     if (!tabla) return;
