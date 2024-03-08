@@ -1,0 +1,127 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td {
+  border-right: 1px solid #ddd;
+}
+
+.day {
+  display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .day {
+    display: table-cell;
+    width: 25px;
+  }
+
+  .day:first-child {
+    display: table-cell;
+  }
+
+  th, td {
+    font-size: 12px;
+    padding: 8px;
+  }
+  .tooltip {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
+    width: 100px;
+  }
+
+  .occupied:hover .tooltip {
+    visibility: visible;
+  }
+
+  .available { background-color: #8bc34a; }
+  .occupied { background-color: #f44336; color: white; }
+  .unavailable { background-color: #bdbdbd; }
+}
+
+@media (min-width: 769px) {
+  .day {
+    display: table-cell;
+  }
+
+  .day:nth-child(2):after { content: "nes"; }
+  .day:nth-child(3):after { content: "rtes"; }
+  .day:nth-child(4):after { content: "ércoles"; }
+  .day:nth-child(5):after { content: "eves"; }
+  .day:nth-child(6):after { content: "ernes"; }
+
+  .available { background-color: #8bc34a; }
+  .occupied { background-color: #f44336; color: white; }
+  .unavailable { background-color: #bdbdbd; }
+}

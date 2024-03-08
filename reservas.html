@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservas de Aula</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:15px"></th>
+          <th class="day">Lu</th>
+          <th class="day">Ma</th>
+          <th class="day">Mi</th>
+          <th class="day">Ju</th>
+          <th class="day">Vi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="width:15px">1h</td>
+          <td class="available"></td>
+          <td class="occupied" data-email="correo1@example.com" data-reason="Clase de Matemáticas"></td>
+          <td class="unavailable"></td>
+          <td class="available"></td>
+          <td class="available"></td>
+        </tr>
+        <tr>
+          <td>2h</td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="occupied" data-email="correo2@example.com" data-reason="Presentación de Proyecto"></td>
+          <td class="available"></td>
+          <td class="occupied" data-email="correo3@example.com" data-reason="Reunión de Equipo"></td>
+        </tr>
+        <tr>
+          <td>3h</td>
+          <td class="occupied" data-email="correo4@example.com" data-reason="Taller de Historia"></td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="unavailable"></td>
+        </tr>
+        <tr>
+          <td>Recreo</td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="occupied" data-email="correo5@example.com" data-reason="Conferencia de Ciencias"></td>
+          <td class="available"></td>
+        </tr>
+        <tr>
+          <td>4h</td>
+          <td class="available"></td>
+          <td class="unavailable"></td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="available"></td>
+        </tr>
+        <tr>
+          <td>5h</td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="unavailable"></td>
+          <td class="available"></td>
+        </tr>
+        <tr>
+          <td>6h</td>
+          <td class="available"></td>
+          <td class="available"></td>
+          <td class="occupied" data-email="correo6@example.com" data-reason="Reunión de Padres"></td>
+          <td class="available"></td>
+          <td class="available"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <!-- Ventana modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Reservar Aula</h2>
+        <form id="reservation-form">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required><br><br>
+          <label for="reason">Motivo de la reserva:</label>
+          <input type="text" id="reason" name="reason" required><br><br>
+          <input type="submit" value="Reservar">
+        </form>
+      </div>
+    </div>
+    
+  <script src="script.js"></script>  
+</body>
+</html>
